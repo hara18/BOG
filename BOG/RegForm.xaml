@@ -1,0 +1,222 @@
+﻿<Window x:Class="BOG.RegForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BOG"
+        mc:Ignorable="d"
+        Title="RegForm" Height="500" Width="900" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <Style x:Key="TextBoxStyle1" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" CornerRadius="5" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF6B5099"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF995081"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="5" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Cursor="Hand" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FF995081"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FF995081"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonBlank" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Cursor='Hand' Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="Transparent"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="Transparent"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Border  CornerRadius="10" BorderBrush="Gainsboro" BorderThickness="0" >
+        <Border.Background>
+            <ImageBrush ImageSource="bog_reg.png"/>
+        </Border.Background>
+
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Orientation="Vertical"  VerticalAlignment="Top" HorizontalAlignment="Center" >
+                <Label Content="Вступай в наши ряды" FontFamily="Segoe UI Light" FontSize="35" Background="{x:Null}" Foreground="#ffffff" >
+
+                    <Label.Effect>
+                        <DropShadowEffect BlurRadius="20" Opacity="0.5"/>
+                    </Label.Effect>
+                </Label>
+                <Label Content="Любое путешествие начинается с первого шага" FontFamily="Segoe UI Light" FontSize="15" Background="{x:Null}" Foreground="#99aab5" 
+                       HorizontalAlignment="Center" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="0,-10,0,0" VerticalContentAlignment="Bottom">
+                    <Label.Effect>
+                        <DropShadowEffect BlurRadius="10" Opacity="0.5" RenderingBias="Quality"/>
+                    </Label.Effect>
+                </Label>
+            </StackPanel>
+
+            <Label Content="НИК" Grid.Column="0" Grid.Row="1" Foreground="White" FontFamily="Segoe UI Semibold"
+                       FontSize="15" HorizontalAlignment="Right" Height="35" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,5,0"/>
+            <TextBox x:Name="nick_reg" Text="введите никнейм" Width="290" Grid.Column="1" Grid.Row="1" Height="35" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
+                         FontFamily="Segoe UI Black" FontSize="10" FontWeight="Bold" Margin="5,0,0,0" Background="#FF23272A" BorderBrush="#FF995081" Foreground="#FF99AAB5" SelectionBrush="White"
+                         HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{DynamicResource TextBoxStyle1}"/>
+            <Label Content="ЛОГИН" Grid.Column="0" Grid.Row="2" Foreground="White" FontFamily="Segoe UI Semibold"
+                       FontSize="15" HorizontalAlignment="Right" Height="35" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="0,5,5,0"/>
+            <TextBox x:Name="login_reg" Text="введите логин" Width="290" Grid.Column="1" Grid.Row="2" Height="35" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
+                         FontFamily="Segoe UI Black" FontSize="10" FontWeight="Bold" Margin="5,5,0,0" Background="#FF23272A" BorderBrush="#FF995081" Foreground="#FF99AAB5" SelectionBrush="White"
+                         HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource TextBoxStyle1}"/>
+            <Label Content="ПАРОЛЬ" Grid.Column="0" Grid.Row="2" Foreground="White" FontFamily="Segoe UI Semibold"
+                       FontSize="15" HorizontalAlignment="Right" Height="35" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,5,0"/>
+            <TextBox x:Name="pass_reg" Text="введите пароль" Width="290" Grid.Column="1" Grid.Row="2" Height="35" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
+                         FontFamily="Segoe UI Black" FontSize="10" FontWeight="Bold" Margin="5,0,0,0" Background="#FF23272A" BorderBrush="#FF995081" Foreground="#FF99AAB5" SelectionBrush="White"
+                         HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{DynamicResource TextBoxStyle1}"/>
+            <Label Content="ЭЛЕКТРОННЫЙ АДРЕС" Grid.Column="0" Grid.Row="3" Foreground="White" FontFamily="Segoe UI Semibold"
+                       FontSize="15" HorizontalAlignment="Right" Height="35" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="0,5,5,0"/>
+            <TextBox x:Name="mail_reg" Text="введите e-mail" Width="290" Grid.Column="1" Grid.Row="3" Height="35" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
+                         FontFamily="Segoe UI Black" FontSize="10" FontWeight="Bold" Margin="5,5,0,0" Background="#FF23272A" BorderBrush="#FF995081" Foreground="#FF99AAB5" SelectionBrush="White"
+                         HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource TextBoxStyle1}"/>
+            <Label Content="ДАТА РОЖДЕНИЯ" Grid.Column="0" Grid.Row="3" Foreground="White" FontFamily="Segoe UI Semibold"
+                       FontSize="15" HorizontalAlignment="Right" Height="35" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,5,0"/>
+            <TextBox x:Name="bday_reg" Text="введите дату рождения" Width="290" Grid.Column="1" Grid.Row="3" Height="35" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
+                         FontFamily="Segoe UI Black" FontSize="10" FontWeight="Bold" Margin="5,0,0,0" Background="#FF23272A" BorderBrush="#FF995081" Foreground="#FF99AAB5" SelectionBrush="White"
+                         HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{DynamicResource TextBoxStyle1}"/>
+            <Label Content="ТЕЛЕФОН" Grid.Column="0" Grid.Row="4" Foreground="White" FontFamily="Segoe UI Semibold"
+                       FontSize="15" HorizontalAlignment="Right" Height="35" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="0,5,5,0"/>
+            <TextBox x:Name="phone_reg" Text="введите мобильный телефон" Width="290" Grid.Column="1" Grid.Row="4" Height="35" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
+                         FontFamily="Segoe UI Black" FontSize="10" FontWeight="Bold" Margin="5,5,0,0" Background="#FF23272A" BorderBrush="#FF995081" Foreground="#FF99AAB5" SelectionBrush="White"
+                         HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource TextBoxStyle1}"/>
+            <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Vertical" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <Button x:Name="registration" Width="290" Height="30" Content="Зарегистрироваться" Margin="5,0,0,0" Foreground="White" 
+                        FontFamily="Segoe UI Semilight" FontSize="15" BorderBrush="{x:Null}"  Background="#FF995081" Style="{DynamicResource ButtonStyle1}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Label Content="Вы передумали?" Foreground="#FF99AAB5" FontFamily="Segoe UI Semibold" FontSize="8" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <Button Content="Вернуться обратно" x:Name="goback_reg" Foreground="#FFE079BE" FontFamily="Segoe UI Semibold" FontSize="8" HorizontalAlignment="Left" VerticalAlignment="Center"  Background="{x:Null}" BorderBrush="{x:Null}" Style="{DynamicResource ButtonBlank}" Click="goback_reg_Click"/>
+            </StackPanel>
+
+
+        </Grid>
+    </Border>
+</Window>
